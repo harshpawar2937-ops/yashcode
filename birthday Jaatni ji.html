@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday, Jaatni Ji! 🎉</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffb6c1 0%, #ffe4e1 100%);
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 60px;
+            padding: 30px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            display: inline-block;
+        }
+        h1 {
+            color: #e75480;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .love-note {
+            color: #d72660;
+            font-size: 1.3em;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .cake {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            to { transform: translateY(-20px); }
+        }
+        .btn, .task-btn {
+            background: #e75480;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .btn:hover, .task-btn:hover {
+            background: #ff69b4;
+        }
+        .task-box {
+            margin-top: 25px;
+            background: #ffe4eb;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 16px rgba(231,84,128,0.1);
+            display: inline-block;
+        }
+        .music-icon {
+            font-size: 2em;
+            vertical-align: middle;
+        }
+        .hidden { display: none; }
+        .success { color: #28a745; font-size: 1.3em; font-weight: bold; }
+        .cry { font-size:2em; color:#e75480; }
+        .hugkiss { font-size:2.2em; color:#e75480; margin-bottom: 12px; }
+        /* Fullscreen Cake Surprise */
+        #fullscreen-cake {
+          position: fixed;
+          z-index: 9999;
+          top:0; left:0; right:0; bottom:0;
+          width: 100vw;
+          height: 100vh;
+          background: radial-gradient(circle at 60% 40%, #ffe4eb 80%, #e75480 100%);
+          display: none;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        #fullscreen-cake.active {
+          display: flex;
+        }
+        .cake-bg {
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+        #cake-animation {
+          position: relative;
+          min-width: 320px;
+          max-width: 700px;
+          margin: auto;
+        }
+        #confetti {
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%;
+          height: 450px;
+          pointer-events: none;
+          overflow: visible;
+          z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio Section Added -->
+    <audio id="bday-audio" src="https://cdn.pixabay.com/audio/2022/10/16/audio_12a9e06c1f.mp3" loop></audio>
+    <button class="btn" id="play-audio-btn" onclick="playSong()" style="margin-bottom:16px;">Play Birthday Song 🎶</button>
+    <div class="container" id="main-container">
+        <div class="cake" aria-label="Birthday cake" role="img">🎂</div>
+        <h1>Happy Birthday, Jaatni Ji! 💖🎈 <span class="music-icon">🎶</span></h1>
+        <div id="main-content">
+            <p>
+                Wishing you the happiest birthday, my love! 🥰<br>
+                You fill my life with so much joy, laughter, and warmth. 😘<br>
+                Thank you for being my inspiration, my support, and my everything. 👩‍❤️‍👨<br>
+                May your day be as beautiful and magical as you are! ✨🌹
+            </p>
+            <div class="love-note">
+                On your special day, I want you to know how deeply you are loved. 💌<br>
+                Every moment with you is a precious memory, and I look forward to creating many more with you. 🕊️<br>
+                Happy Birthday, Jaatni Ji! You are my heart, my soulmate, and my forever. 💞🌟
+            </div>
+            <button class="btn" onclick="showGame()">Let’s Play a Birthday Game! 🎮</button>
+        </div>
+        <!-- Task 1 -->
+        <div id="task-1" class="task-box hidden">
+            <h2>Task 1: Choose Your Favorite Emoji! 😄</h2>
+            <p>Kaunsa emoji aapko sabse zyada pasand hai? (Just click one!)</p>
+            <button class="task-btn" onclick="nextTask('task-1','task-2')">😍</button>
+            <button class="task-btn" onclick="nextTask('task-1','task-2')">🥳</button>
+            <button class="task-btn" onclick="nextTask('task-1','task-2')">🌹</button>
+        </div>
+        <!-- Task 2 -->
+        <div id="task-2" class="task-box hidden">
+            <h2>Task 2: Answer This! 💬</h2>
+            <p>Birthday pe sabse special feeling kya hoti hai? <br>(Just type and click Next!)</p>
+            <input type="text" id="answer" placeholder="Type your answer here..." style="padding:8px;border-radius:8px;border:1px solid #e75480;width:60%;max-width:220px;">
+            <br>
+            <button class="task-btn" onclick="nextTask('task-2','task-3')">Next ➡️</button>
+        </div>
+        <!-- Task 3 -->
+        <div id="task-3" class="task-box hidden">
+            <h2>Task 3: Quick Challenge! 🕹️</h2>
+            <p>Type "Happy Birthday Jaatni Ji" and click Next!</p>
+            <input type="text" id="challenge" placeholder="Type here..." style="padding:8px;border-radius:8px;border:1px solid #e75480;width:60%;max-width:220px;">
+            <br>
+            <button class="task-btn" onclick="
+                if(document.getElementById('challenge').value.toLowerCase().includes('happy birthday jaatni ji')) {
+                    askLove();
+                } else {
+                    alert('Galat answer! Sahi likho 😊');
+                }
+            ">Next ➡️</button>
+        </div>
+        <!-- Love Question -->
+        <div id="love-question" class="task-box hidden">
+            <h2>Special Question! 💘</h2>
+            <p>Madam Ji, do you love me? 🥺💖</p>
+            <button class="task-btn" onclick="loveAnswer('yes')">Yes 😍</button>
+            <button class="task-btn" onclick="loveAnswer('no')">No 🙁</button>
+        </div>
+        <!-- Request Yes if No -->
+        <div id="request-yes" class="task-box hidden">
+            <h2 class="cry">😢 Please say Yes, Madam Ji! 😢</h2>
+            <p>Aapke Yes ke bina birthday complete nahi ho sakta! 🙏<br>
+            Ek baar phir try karo... 💖</p>
+            <button class="task-btn" onclick="requestYes()">Wapas Jaao</button>
+        </div>
+        <!-- Congratulations & Surprise (with hug & kiss emoji if Yes) -->
+        <div id="congrats" class="task-box hidden">
+            <div class="hugkiss">
+              <img src="https://em-content.zobj.net/thumbs/240/apple/354/hugging-face_1f917.png" alt="Hugging Face" width="48">
+              <img src="https://em-content.zobj.net/thumbs/240/apple/354/face-blowing-a-kiss_1f618.png" alt="Kiss Face" width="48">
+            </div>
+            <div class="success">Yay! Jaatni Ji ne Yes bola!<br>
+                Sending you a big hug and lots of kisses!<br>
+                Congratulations! 🎊<br>
+                Ab dekho apna surprise 👇
+            </div>
+            <button class="btn" onclick="showCakeSurprise()">See Your Surprise 🎁</button>
+        </div>
+    </div>
+
+    <!-- Fullscreen Cake Surprise Section -->
+    <div id="fullscreen-cake">
+      <div class="cake-bg">
+        <div id="cake-animation">
+          <img id="big-cake" src="https://em-content.zobj.net/thumbs/240/apple/354/birthday-cake_1f382.png" alt="Birthday Cake" width="220" style="transition:all 1.2s;">
+          <br>
+          <button class="btn" onclick="cutCake()" id="cut-cake-btn" style="margin-top:28px;font-size:1.2em;">Cake Kaaten 🎂</button>
+          <div id="cake-message" class="success hidden" style="margin-top:28px;font-size:1.5em;"></div>
+          <div id="confetti" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Audio play on button click
+      function playSong() {
+        var audio = document.getElementById('bday-audio');
+        audio.play();
+        document.getElementById('play-audio-btn').style.display = "none";
+      }
+
+      // Game flow
+      function showGame() {
+        document.getElementById('main-content').classList.add('hidden');
+        document.getElementById('task-1').classList.remove('hidden');
+      }
+      function nextTask(current, next) {
+        document.getElementById(current).classList.add('hidden');
+        document.getElementById(next).classList.remove('hidden');
+      }
+      function askLove() {
+        document.getElementById('task-3').classList.add('hidden');
+        document.getElementById('love-question').classList.remove('hidden');
+      }
+      function loveAnswer(ans) {
+        if(ans === 'yes') {
+          document.getElementById('love-question').classList.add('hidden');
+          document.getElementById('congrats').classList.remove('hidden');
+        } else {
+          document.getElementById('love-question').classList.add('hidden');
+          document.getElementById('request-yes').classList.remove('hidden');
+        }
+      }
+      function requestYes() {
+        document.getElementById('request-yes').classList.add('hidden');
+        document.getElementById('love-question').classList.remove('hidden');
+      }
+
+      // Show fullscreen cake surprise
+      function showCakeSurprise() {
+        document.getElementById('main-container').classList.add('hidden');
+        document.getElementById('fullscreen-cake').classList.add('active');
+      }
+
+      // Cake cutting & confetti
+      function cutCake() {
+        var cakeImg = document.getElementById('big-cake');
+        var btn = document.getElementById('cut-cake-btn');
+        cakeImg.style.opacity = "0.3";
+        cakeImg.style.transform = "scale(0.5) rotate(-15deg)";
+        btn.disabled = true;
+        setTimeout(function(){
+          cakeImg.style.display = "none";
+          document.getElementById('cake-message').innerHTML =
+            "Cake kaat diya! 🎂<br>Happy Birthday Jaatni Ji! 🎉<br><span style='font-size:2em;'>🤗😘</span>";
+          document.getElementById('cake-message').classList.remove('hidden');
+          showConfetti();
+        }, 1200);
+      }
+      function showConfetti() {
+        var confetti = document.getElementById('confetti');
+        confetti.innerHTML = "";
+        confetti.classList.remove('hidden');
+        var emojis = ["🪔","🎆","✨","🪄","🎇","🔥","🧨"];
+        for(let i=0; i<26; i++){
+          let e = document.createElement("span");
+          e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+          e.style.position = "absolute";
+          e.style.fontSize = (32 + Math.random()*42)+"px";
+          e.style.top = (320 + Math.random()*80) + "px";
+          e.style.left = (60 + Math.random()*600) + "px";
+          e.style.opacity = "1";
+          e.style.transition = "all 2.2s";
+          confetti.appendChild(e);
+          setTimeout(()=> {
+            e.style.top = (80 + Math.random()*100) + "px";
+            e.style.opacity = "0";
+          }, 250);
+          setTimeout(()=> {
+            if (e.parentNode) e.parentNode.removeChild(e);
+          }, 2200);
+        }
+      }
+    </script>
+</body>
+</html>
